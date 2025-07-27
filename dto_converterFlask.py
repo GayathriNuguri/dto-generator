@@ -2,7 +2,10 @@ from flask import Flask, request, jsonify
 import google.generativeai as genai
 from google.genai import types
 
-GOOGLE_API_KEY = ""  
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable not set")
+
 genai.configure(api_key=GOOGLE_API_KEY)
 
 model_config = types.GenerateContentConfig(

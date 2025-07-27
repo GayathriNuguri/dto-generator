@@ -1,9 +1,12 @@
 from flask import Flask, request, jsonify
 import google.generativeai as genai
 from google.generativeai import GenerativeModel
+import os
 
-# ✅ Configure API Key
-GOOGLE_API_KEY = "YOUR_GEMINI_API_KEY"  # Replace with your actual key
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable not set")
+
 genai.configure(api_key=GOOGLE_API_KEY)
 
 app = Flask(__name__)
@@ -37,13 +40,11 @@ def generate_dto_api():
         class_name = data.get("className", "MyDTO")  # default name if not given
 
         dto_code = generate_dto(class_name, requirement)
+        return jsonify({
+            "dto": dto_code,
+            "className": class_name
+        }), 200
 
-        # ✅ Optional: Save to .java file
-        file_path = f"{class_name}.java"
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write(dto_code)
-
-        return jsonify({"dto": dto_code, "savedFile": file_path})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
