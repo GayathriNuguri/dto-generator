@@ -29,7 +29,6 @@ This is useful for automating boilerplate DTO creation in Java projects.
 ✔ Generate clean Java DTO classes with fields, constructors, getters, and setters
 ✔ Customizable class name and fields
 ✔ Uses environment variable for `GOOGLE_API_KEY` (secure, no hardcoding)
-✔ Saves the generated DTO as a `.java` file
 ✔ Integrated with Spring Boot for enterprise use
 
 ---
@@ -219,18 +218,5 @@ Contributions are welcome! Fork this repo, make changes, and raise a pull reques
 ## 📜 **License**
 
 This project is licensed under the MIT License.
-
----
-
-### ✅ **Next Steps for You**
-
-1. **Copy all of the above into a `README.md` file** in your project folder.
-2. Run these commands to push it:
-
-```bash
-git add README.md
-git commit -m "Added complete README"
-git push
-```
 
 
