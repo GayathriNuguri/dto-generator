@@ -4,7 +4,12 @@ from google import genai
 from google.genai import types
 from google.api_core import retry
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable not set")
+
+genai.configure(api_key=GOOGLE_API_KEY)
+
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
 is_retriable = lambda e: (isinstance(e, genai.errors.APIError) and e.code in {429, 503})
