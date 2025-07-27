@@ -4,7 +4,7 @@ from google import genai
 from google.genai import types
 from google.api_core import retry
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "AIzaSyDU6ukCrjBq1IV3JFNvBlncqjTLziA7ECY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 client = genai.Client(api_key=GOOGLE_API_KEY)
 
 is_retriable = lambda e: (isinstance(e, genai.errors.APIError) and e.code in {429, 503})
